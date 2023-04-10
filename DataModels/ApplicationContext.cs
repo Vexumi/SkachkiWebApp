@@ -23,6 +23,6 @@ public class ApplicationContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CompetitionTicket>().HasKey(o => new { o.TiketId, o.CompetitionId, o.HorseId, o.JokeyId});
-        modelBuilder.Entity<Ippodrom>().HasData(new Ippodrom { Id=2, Address="Krasnaya 23", Description="Nice map"});
+        //modelBuilder.Entity<Ippodrom>().HasData(new Ippodrom { Id=2, Address="Krasnaya 23", Description="Nice map"});
     }
 }

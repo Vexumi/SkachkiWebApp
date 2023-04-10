@@ -9,7 +9,8 @@ public class ApplicationContext : DbContext
     public DbSet<HorseOwner> HorseOwners { get; set; } = null!;
     public DbSet<Ippodrom> Ippodroms { get; set; } = null!;
     public DbSet<Jokey> Jokeys { get; set; } = null!;
-    public ApplicationContext()
+
+    public ApplicationContext(DbContextOptions options) : base(options)
     {
         //Database.EnsureDeleted();
         Database.EnsureCreated();
@@ -17,7 +18,7 @@ public class ApplicationContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=DataBases/Skachki.db");
+        //optionsBuilder.UseSqlite("Data Source=DataBases/Skachki.db");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

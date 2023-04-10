@@ -8,13 +8,13 @@ namespace SkachkiWebApp
         {
             string result = "<table>";
             result += "<tr><th>Id</th><th>Address</th><th>Description</th></tr>";
-            using (ApplicationContext db = new ApplicationContext())
+            /*using (ApplicationContext db = new ApplicationContext())
             {
                 foreach (var ippo in db.Ippodroms.ToList())
                 {
                     result += $"<tr><th>{ippo.Id}</th><th>{ippo.Address}</th><th>{ippo.Description}</th></tr>";
                 }
-            }
+            }*/
             result = $"{result}</table>";
             return new HtmlString(result);
         }

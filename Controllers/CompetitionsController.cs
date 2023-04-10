@@ -46,7 +46,7 @@ namespace SkachkiWebApp.Controllers
         // GET: Competitions/Create
         public IActionResult Create()
         {
-            ViewData["IppodromId"] = new SelectList(_context.Ippodroms, "Id", "Id");
+            ViewBag.Ippodroms = new SelectList(_context.Ippodroms, "Id", "Address");
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace SkachkiWebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IppodromId"] = new SelectList(_context.Ippodroms, "Id", "Id", competition.IppodromId);
+            ViewData["IppodromId"] = new SelectList(_context.Ippodroms, "Id", "Address", competition.IppodromId);
             return View(competition);
         }
 
@@ -80,7 +80,7 @@ namespace SkachkiWebApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["IppodromId"] = new SelectList(_context.Ippodroms, "Id", "Id", competition.IppodromId);
+            ViewBag.Ippodroms = new SelectList(_context.Ippodroms, "Id", "Address", competition.IppodromId);
             return View(competition);
         }
 
@@ -116,7 +116,7 @@ namespace SkachkiWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IppodromId"] = new SelectList(_context.Ippodroms, "Id", "Id", competition.IppodromId);
+            ViewData["IppodromId"] = new SelectList(_context.Ippodroms, "Id", "Address", competition.IppodromId);
             return View(competition);
         }
 

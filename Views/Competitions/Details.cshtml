@@ -26,7 +26,7 @@
             @Html.DisplayNameFor(model => model.Ippodrom)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ippodrom.Address)
+            <a class="nav-link text-dark" asp-area="" asp-controller="Ippodroms" asp-action="Details" asp-route-id="@Model.IppodromId">@Model.Ippodrom.Address</a>
         </dd>
     </dl>
 </div>

@@ -12,7 +12,7 @@ public class ApplicationContext : DbContext
 
     public ApplicationContext(DbContextOptions options) : base(options)
     {
-        Database.EnsureDeleted();
+        //Database.EnsureDeleted();
         Database.EnsureCreated();
     }
 
@@ -22,7 +22,7 @@ public class ApplicationContext : DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<CompetitionTicketModel>().HasKey(o => new { o.TiketId, o.CompetitionId, o.HorseId, o.JokeyId});
+        modelBuilder.Entity<CompetitionTicketModel>().HasKey(o => o.TiketId );
         //modelBuilder.Entity<Ippodrom>().HasData(new Ippodrom { Id=2, Address="Krasnaya 23", Description="Nice map"});
     }
 }

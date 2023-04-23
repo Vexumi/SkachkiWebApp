@@ -18,10 +18,9 @@
                 <input asp-for="Nickname" class="form-control" />
                 <span asp-validation-for="Nickname" class="text-danger"></span>
             </div>
-            <div class="form-group">
+           <div class="form-group">
                 <label asp-for="Sex" class="control-label"></label>
-                <input asp-for="Sex" class="form-control" />
-                <span asp-validation-for="Sex" class="text-danger"></span>
+                <select asp-for="Sex" class="form-control" asp-items="ViewBag.Sex"></select>
             </div>
             <div class="form-group">
                 <label asp-for="DOB" class="control-label"></label>
@@ -30,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="HorseOwnerId" class="control-label"></label>
-                <select asp-for="HorseOwnerId" class="form-control" asp-items="ViewBag.HorseOwnerId"></select>
+                <select asp-for="HorseOwnerId" class="form-control" asp-items="ViewBag.HorseOwners"></select>
                 <span asp-validation-for="HorseOwnerId" class="text-danger"></span>
             </div>
             <div class="form-group">

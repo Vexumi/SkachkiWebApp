@@ -81,7 +81,8 @@ namespace SkachkiWebApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["HorseOwnerId"] = new SelectList(_context.HorseOwners, "Id", "Id", horseModel.HorseOwnerId);
+            ViewBag.HorseOwners = new SelectList(_context.HorseOwners, "Id", "Name", horseModel.HorseOwnerId);
+            ViewBag.Sex = new SelectList(new string[] { "Male", "Female" });
             return View(horseModel);
         }
 

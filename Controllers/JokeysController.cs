@@ -58,6 +58,7 @@ namespace SkachkiWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (jokey.Rating == null) jokey.Rating = 0;
                 _context.Add(jokey);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

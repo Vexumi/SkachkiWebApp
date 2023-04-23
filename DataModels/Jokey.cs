@@ -6,7 +6,7 @@
     public DateTime CreationDate { get; set; }
 
     public string? Name { get; set; }
-    public string? DOB { get; set; } // date of birth day
+    public DateOnly? DOB { get; set; } // date of birth day
     public int? Rating { get; set; }
 
 }

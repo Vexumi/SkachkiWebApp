@@ -8,83 +8,87 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SkachkiWebApp.Controllers
 {
-    public class IppodromsController : Controller
+    public class JokeysController : Controller
     {
-        private ApplicationContext _context;
-        public IppodromsController(ApplicationContext context)
+        private readonly ApplicationContext _context;
+
+        public JokeysController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: Ippodroms
+        // GET: Jokeys
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ippodroms.ToListAsync());
+              return _context.Jokeys != null ? 
+                          View(await _context.Jokeys.ToListAsync()) :
+                          Problem("Entity set 'ApplicationContext.Jokeys'  is null.");
         }
 
-        // GET: Ippodroms/Details/5
+        // GET: Jokeys/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Ippodroms == null)
+            if (id == null || _context.Jokeys == null)
             {
                 return NotFound();
             }
 
-            var ippodrom = await _context.Ippodroms.FirstOrDefaultAsync(m => m.Id == id);
-            if (ippodrom == null)
+            var jokey = await _context.Jokeys
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (jokey == null)
             {
                 return NotFound();
             }
 
-            return View(ippodrom);
+            return View(jokey);
         }
 
-        // GET: Ippodroms/Create
+        // GET: Jokeys/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Ippodroms/Create
+        // POST: Jokeys/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Address,Description")] Ippodrom ippodrom)
+        public async Task<IActionResult> Create([Bind("Id,Email,Password,CreationDate,Name,DOB,Rating")] Jokey jokey)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ippodrom);
-                _context.SaveChangesAsync();
+                _context.Add(jokey);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ippodrom);
+            return View(jokey);
         }
 
-        // GET: Ippodroms/Edit/5
+        // GET: Jokeys/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Ippodroms == null)
+            if (id == null || _context.Jokeys == null)
             {
                 return NotFound();
             }
 
-            var ippodrom = await _context.Ippodroms.FindAsync(id);
-            if (ippodrom == null)
+            var jokey = await _context.Jokeys.FindAsync(id);
+            if (jokey == null)
             {
                 return NotFound();
             }
-            return View(ippodrom);
+            return View(jokey);
         }
 
-        // POST: Ippodroms/Edit/5
+        // POST: Jokeys/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Address,Description")] Ippodrom ippodrom)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,CreationDate,Name,DOB,Rating")] Jokey jokey)
         {
-            if (id != ippodrom.Id)
+            if (id != jokey.Id)
             {
                 return NotFound();
             }
@@ -93,12 +97,12 @@ namespace SkachkiWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(ippodrom);
+                    _context.Update(jokey);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!IppodromExists(ippodrom.Id))
+                    if (!JokeyExists(jokey.Id))
                     {
                         return NotFound();
                     }
@@ -109,50 +113,49 @@ namespace SkachkiWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ippodrom);
+            return View(jokey);
         }
 
-        // GET: Ippodroms/Delete/5
+        // GET: Jokeys/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Ippodroms == null)
+            if (id == null || _context.Jokeys == null)
             {
                 return NotFound();
             }
 
-            var ippodrom = await _context.Ippodroms
+            var jokey = await _context.Jokeys
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (ippodrom == null)
+            if (jokey == null)
             {
                 return NotFound();
             }
 
-            return View(ippodrom);
+            return View(jokey);
         }
 
-        // POST: Ippodroms/Delete/5
+        // POST: Jokeys/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Ippodroms == null)
+            if (_context.Jokeys == null)
             {
-                return Problem("Entity set 'ApplicationContext.Ippodroms'  is null.");
+                return Problem("Entity set 'ApplicationContext.Jokeys'  is null.");
             }
-            var ippodrom = await _context.Ippodroms.FindAsync(id);
-            if (ippodrom != null)
+            var jokey = await _context.Jokeys.FindAsync(id);
+            if (jokey != null)
             {
-                _context.Ippodroms.Remove(ippodrom);
-                await _context.SaveChangesAsync();
+                _context.Jokeys.Remove(jokey);
             }
-
+            
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
-        // Test if Ippodrom DB line exists
-        private bool IppodromExists(int id)
+
+        private bool JokeyExists(int id)
         {
-            return (_context.Ippodroms?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Jokeys?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

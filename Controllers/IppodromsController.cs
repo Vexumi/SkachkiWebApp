@@ -138,12 +138,12 @@ namespace SkachkiWebApp.Controllers
             if (ippodrom != null)
             {
                 _context.Ippodroms.Remove(ippodrom);
+                _context.SaveChanges();
             }
 
-            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-
+        
         // Test if Ippodrom DB line exists
         private bool IppodromExists(int id)
         {

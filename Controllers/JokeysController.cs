@@ -54,7 +54,7 @@ namespace SkachkiWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Email,Password,CreationDate,Name,DOB,Rating")] Jokey jokey)
+        public async Task<IActionResult> Create([Bind("Id,Email,Password,CreationDate,Name,DOB,Rating")] JokeyModel jokey)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace SkachkiWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,CreationDate,Name,DOB,Rating")] Jokey jokey)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,CreationDate,Name,DOB,Rating")] JokeyModel jokey)
         {
             if (id != jokey.Id)
             {

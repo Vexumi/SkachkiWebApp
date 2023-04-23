@@ -3,12 +3,12 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 public class ApplicationContext : DbContext
 {
-    public DbSet<Competition> Competitions { get; set; } = null!;
-    public DbSet<CompetitionTicket> CompetitionTickets { get; set; } = null!;
-    public DbSet<Horse> Horses { get; set; } = null!;
-    public DbSet<HorseOwner> HorseOwners { get; set; } = null!;
-    public DbSet<Ippodrom> Ippodroms { get; set; } = null!;
-    public DbSet<Jokey> Jokeys { get; set; } = null!;
+    public DbSet<CompetitionModel> Competitions { get; set; } = null!;
+    public DbSet<CompetitionTicketModel> CompetitionTickets { get; set; } = null!;
+    public DbSet<HorseModel> Horses { get; set; } = null!;
+    public DbSet<HorseOwnerModel> HorseOwners { get; set; } = null!;
+    public DbSet<IppodromModel> Ippodroms { get; set; } = null!;
+    public DbSet<JokeyModel> Jokeys { get; set; } = null!;
 
     public ApplicationContext(DbContextOptions options) : base(options)
     {
@@ -22,7 +22,7 @@ public class ApplicationContext : DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<CompetitionTicket>().HasKey(o => new { o.TiketId, o.CompetitionId, o.HorseId, o.JokeyId});
+        modelBuilder.Entity<CompetitionTicketModel>().HasKey(o => new { o.TiketId, o.CompetitionId, o.HorseId, o.JokeyId});
         //modelBuilder.Entity<Ippodrom>().HasData(new Ippodrom { Id=2, Address="Krasnaya 23", Description="Nice map"});
     }
 }

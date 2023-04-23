@@ -55,7 +55,7 @@ namespace SkachkiWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Date,IppodromId")] Competition competition)
+        public async Task<IActionResult> Create([Bind("Id,Name,Date,IppodromId")] CompetitionModel competition)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace SkachkiWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,IppodromId")] Competition competition)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,IppodromId")] CompetitionModel competition)
         {
             if (id != competition.Id)
             {

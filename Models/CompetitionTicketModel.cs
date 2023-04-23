@@ -1,18 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-public class CompetitionTicket
+public class CompetitionTicketModel
 
 {
     public int TiketId { get; set; }
     public int CompetitionId { get; set; }
     [ForeignKey("CompetitionId")]
-    public Competition? Competition { get; set; }
+    public CompetitionModel? Competition { get; set; }
     public int HorseId { get; set; }
     [ForeignKey("HorseId")]
-    public Horse? Horse { get; set; }
+    public HorseModel? Horse { get; set; }
     public int JokeyId { get; set; }
     [ForeignKey("JokeyId")]
-    public Jokey? Jokey { get; set; }
+    public JokeyModel? Jokey { get; set; }
     public string? Result { get; set; }
 }

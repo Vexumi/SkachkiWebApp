@@ -1,4 +1,4 @@
-﻿public class Ippodrom
+﻿public class IppodromModel
 {
     public int Id { get; set; }
     public string? Address { get; set; }

@@ -9,7 +9,7 @@ public class JokeyModel
 
     public string? Name { get; set; }
     [DisplayName("Date Of Birth")]
-    public DateOnly? DOB { get; set; } // date of birth day
+    public DateTime? DOB { get; set; } // date of birth 
     public int? Rating { get; set; }
 
 }

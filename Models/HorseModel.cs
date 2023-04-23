@@ -7,7 +7,7 @@ public class HorseModel
     public string? Nickname { get; set; }
     public string? Sex { get; set; }
     [DisplayName("Date Of Birth")]
-    public DateOnly? DOB { get; set; } // date of birth
+    public DateTime? DOB { get; set; } // date of birth
     public int? HorseOwnerId { get; set; }
     [ForeignKey("HorseOwnerId")]
     public HorseOwnerModel? HorseOwner { get; set; }

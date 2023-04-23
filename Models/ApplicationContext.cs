@@ -12,7 +12,7 @@ public class ApplicationContext : DbContext
 
     public ApplicationContext(DbContextOptions options) : base(options)
     {
-        //Database.EnsureDeleted();
+        Database.EnsureDeleted();
         Database.EnsureCreated();
     }
 

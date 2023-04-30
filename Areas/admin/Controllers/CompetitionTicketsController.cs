@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace SkachkiWebApp.Controllers
+namespace SkachkiWebApp.Areas.admin.Controllers
 {
+    [Area("admin")]
     public class CompetitionTicketsController : Controller
     {
         private readonly ApplicationContext _context;
@@ -165,14 +166,14 @@ namespace SkachkiWebApp.Controllers
             {
                 _context.CompetitionTickets.Remove(competitionTicketModel);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CompetitionTicketModelExists(int id)
         {
-          return (_context.CompetitionTickets?.Any(e => e.TiketId == id)).GetValueOrDefault();
+            return (_context.CompetitionTickets?.Any(e => e.TiketId == id)).GetValueOrDefault();
         }
     }
 }

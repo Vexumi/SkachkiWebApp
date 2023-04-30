@@ -29,7 +29,6 @@ namespace SkachkiWebApp.Controllers
             return View();
         }
 
-        [Authorize(Roles = "admin")]
         public IActionResult Privacy()
         {
             return View();

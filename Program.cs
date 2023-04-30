@@ -42,13 +42,13 @@ app.UseAuthentication();   // добавление middleware аутентификации
 app.UseAuthorization();   // добавление middleware авторизации 
 
 // добавляем поддержку контроллеров, которые располагаются в области
-/*app.UseEndpoints(endpoints =>
+app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
       name: "areas",
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
-});*/
+});
 
 app.MapControllerRoute(
     name: "default",

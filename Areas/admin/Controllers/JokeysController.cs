@@ -6,89 +6,91 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace SkachkiWebApp.Controllers
+namespace SkachkiWebApp.Areas.admin.Controllers
 {
-    public class HorseOwnersController : Controller
+    [Area("admin")]
+    public class JokeysController : Controller
     {
         private readonly ApplicationContext _context;
 
-        public HorseOwnersController(ApplicationContext context)
+        public JokeysController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: HorseOwners
+        // GET: Jokeys
         public async Task<IActionResult> Index()
         {
-              return _context.HorseOwners != null ? 
-                          View(await _context.HorseOwners.ToListAsync()) :
-                          Problem("Entity set 'ApplicationContext.HorseOwners'  is null.");
+            return _context.Jokeys != null ?
+                        View(await _context.Jokeys.ToListAsync()) :
+                        Problem("Entity set 'ApplicationContext.Jokeys'  is null.");
         }
 
-        // GET: HorseOwners/Details/5
+        // GET: Jokeys/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.HorseOwners == null)
+            if (id == null || _context.Jokeys == null)
             {
                 return NotFound();
             }
 
-            var horseOwnerModel = await _context.HorseOwners
+            var jokey = await _context.Jokeys
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (horseOwnerModel == null)
+            if (jokey == null)
             {
                 return NotFound();
             }
 
-            return View(horseOwnerModel);
+            return View(jokey);
         }
 
-        // GET: HorseOwners/Create
+        // GET: Jokeys/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: HorseOwners/Create
+        // POST: Jokeys/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,Phone")] HorseOwnerModel horseOwnerModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,DOB,Rating")] JokeyModel jokey)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(horseOwnerModel);
+                if (jokey.Rating == null) jokey.Rating = 0;
+                _context.Add(jokey);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(horseOwnerModel);
+            return View(jokey);
         }
 
-        // GET: HorseOwners/Edit/5
+        // GET: Jokeys/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.HorseOwners == null)
+            if (id == null || _context.Jokeys == null)
             {
                 return NotFound();
             }
 
-            var horseOwnerModel = await _context.HorseOwners.FindAsync(id);
-            if (horseOwnerModel == null)
+            var jokey = await _context.Jokeys.FindAsync(id);
+            if (jokey == null)
             {
                 return NotFound();
             }
-            return View(horseOwnerModel);
+            return View(jokey);
         }
 
-        // POST: HorseOwners/Edit/5
+        // POST: Jokeys/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Phone")] HorseOwnerModel horseOwnerModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DOB,Rating")] JokeyModel jokey)
         {
-            if (id != horseOwnerModel.Id)
+            if (id != jokey.Id)
             {
                 return NotFound();
             }
@@ -97,12 +99,12 @@ namespace SkachkiWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(horseOwnerModel);
+                    _context.Update(jokey);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HorseOwnerModelExists(horseOwnerModel.Id))
+                    if (!JokeyExists(jokey.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +115,49 @@ namespace SkachkiWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(horseOwnerModel);
+            return View(jokey);
         }
 
-        // GET: HorseOwners/Delete/5
+        // GET: Jokeys/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.HorseOwners == null)
+            if (id == null || _context.Jokeys == null)
             {
                 return NotFound();
             }
 
-            var horseOwnerModel = await _context.HorseOwners
+            var jokey = await _context.Jokeys
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (horseOwnerModel == null)
+            if (jokey == null)
             {
                 return NotFound();
             }
 
-            return View(horseOwnerModel);
+            return View(jokey);
         }
 
-        // POST: HorseOwners/Delete/5
+        // POST: Jokeys/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.HorseOwners == null)
+            if (_context.Jokeys == null)
             {
-                return Problem("Entity set 'ApplicationContext.HorseOwners'  is null.");
+                return Problem("Entity set 'ApplicationContext.Jokeys'  is null.");
             }
-            var horseOwnerModel = await _context.HorseOwners.FindAsync(id);
-            if (horseOwnerModel != null)
+            var jokey = await _context.Jokeys.FindAsync(id);
+            if (jokey != null)
             {
-                _context.HorseOwners.Remove(horseOwnerModel);
+                _context.Jokeys.Remove(jokey);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HorseOwnerModelExists(int id)
+        private bool JokeyExists(int id)
         {
-          return (_context.HorseOwners?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Jokeys?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

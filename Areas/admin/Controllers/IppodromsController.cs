@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace SkachkiWebApp.Controllers
+namespace SkachkiWebApp.Areas.admin.Controllers
 {
+    [Area("admin")]
     public class IppodromsController : Controller
     {
         private ApplicationContext _context;
@@ -148,7 +149,7 @@ namespace SkachkiWebApp.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        
+
         // Test if Ippodrom DB line exists
         private bool IppodromExists(int id)
         {

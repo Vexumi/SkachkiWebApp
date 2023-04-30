@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SkachkiWebApp.Models;
 using SQLitePCL;
@@ -35,7 +36,7 @@ namespace SkachkiWebApp.Controllers
         }
 
         //GET: /login
-        [ActionName("login")]
+        [Route("/login")]
         public IActionResult Login()
         {
             return View();
@@ -44,7 +45,7 @@ namespace SkachkiWebApp.Controllers
         //POST: /login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("login")]
+        [Route("/login")]
         public async Task<IActionResult> Login([Bind("Email,Password")] LoginModel loginData)
         {
             if (string.IsNullOrEmpty(loginData.Password) || string.IsNullOrEmpty(loginData.Email)) return Unauthorized();
@@ -69,11 +70,19 @@ namespace SkachkiWebApp.Controllers
         }
 
         //GET: /logout
-        [ActionName("logout")]
+        [Route("/logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
+        }
+
+        //GET: /register
+        [Route("/register")]
+        public IActionResult Register()
+        {
+            ViewBag.Roles = new SelectList(_context.Roles, "Id", "Name");
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

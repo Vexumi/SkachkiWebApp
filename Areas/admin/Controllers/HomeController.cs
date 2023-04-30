@@ -14,6 +14,7 @@ using System.Security.Principal;
 namespace SkachkiWebApp.Areas.admin.Controllers
 {
     [Area("admin")]
+    [Authorize(Roles = "admin")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

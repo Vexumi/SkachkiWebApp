@@ -39,7 +39,7 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<CompetitionTicketModel>().HasKey(o => o.TiketId );
 
 
-        UserModel user = new UserModel { Id = 1, Email = "gleb@gmail.com", Password = "qwerty", CreationDate = DateTime.Now, RoleId = 1 };
+        UserModel user = new UserModel { Id = 1, Email = "admin", Password = "admin", CreationDate = DateTime.Now, RoleId = 1 };
         modelBuilder.Entity<UserModel>().HasData(user);
 
         //modelBuilder.Entity<Ippodrom>().HasData(new Ippodrom { Id=2, Address="Krasnaya 23", Description="Nice map"}); // test data

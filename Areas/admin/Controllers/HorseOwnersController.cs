@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace SkachkiWebApp.Areas.admin.Controllers
 {
     [Area("admin")]
+    [Authorize(Roles = "admin")]
     public class HorseOwnersController : Controller
     {
         private readonly ApplicationContext _context;

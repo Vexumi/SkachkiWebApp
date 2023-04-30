@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SkachkiWebApp.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 public class ApplicationContext : DbContext
@@ -9,6 +10,7 @@ public class ApplicationContext : DbContext
     public DbSet<HorseOwnerModel> HorseOwners { get; set; } = null!;
     public DbSet<IppodromModel> Ippodroms { get; set; } = null!;
     public DbSet<JokeyModel> Jokeys { get; set; } = null!;
+    public DbSet<UserModel> Users { get; set; } = null!;
 
     public ApplicationContext(DbContextOptions options) : base(options)
     {

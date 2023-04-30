@@ -10,20 +10,18 @@ string connection = builder.Configuration.GetConnectionString("DefaultConnection
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(connection));
 
-/*// аутентификация с помощью куки
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options => options.LoginPath = "/login");
-builder.Services.AddAuthorization(options =>
-{
-    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
-});*/
-
-
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// аутентификация с помощью куки
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Home/login";
+        options.AccessDeniedPath = "/Home/accessdenied";
+    });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -41,7 +39,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();   // добавление middleware аутентификации 
-//app.UseAuthorization();   // добавление middleware авторизации 
+app.UseAuthorization();   // добавление middleware авторизации 
 
 // добавляем поддержку контроллеров, которые располагаются в области
 /*app.UseEndpoints(endpoints =>

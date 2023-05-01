@@ -44,7 +44,7 @@ namespace SkachkiWebApp.Controllers
             UserModel user = new UserModel { Email=regHD.Email, Password=regHD.Password, CreationDate=DateTime.Now,RoleId=3,UserId=userId};
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         //GET: /jokey
@@ -70,7 +70,7 @@ namespace SkachkiWebApp.Controllers
             UserModel user = new UserModel { Email = regJ.Email, Password = regJ.Password, CreationDate = DateTime.Now, RoleId = 2, UserId = userId };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

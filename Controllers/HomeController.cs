@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -37,9 +38,8 @@ namespace SkachkiWebApp.Controllers
 
         //GET: /login
         [ActionName("login")]
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -47,7 +47,7 @@ namespace SkachkiWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("login")]
-        public async Task<IActionResult> Login([Bind("Email,Password")] LoginModel loginData, string returnUrl)
+        public async Task<IActionResult> Login(LoginModel loginData)
         {
             if (string.IsNullOrEmpty(loginData.Password) || string.IsNullOrEmpty(loginData.Email)) return Unauthorized();
             UserModel? user = await _context.Users.FirstOrDefaultAsync(p => p.Email == loginData.Email && p.Password == loginData.Password);
@@ -62,16 +62,21 @@ namespace SkachkiWebApp.Controllers
             var authProperties = new AuthenticationProperties
             {
                 AllowRefresh = true,
-                ExpiresUtc = DateTimeOffset.Now.AddMinutes(1),
+                ExpiresUtc = DateTimeOffset.Now.AddMinutes(10),
                 IsPersistent = true,
             };
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsPrincipal), authProperties);
-
-            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            /*
+            // проверяем, принадлежит ли URL приложению
+            if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
             {
-                return Redirect(returnUrl);
+                return Redirect(model.ReturnUrl);
             }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }*/
             return RedirectToAction("Index");
         }
 

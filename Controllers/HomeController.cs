@@ -36,17 +36,18 @@ namespace SkachkiWebApp.Controllers
         }
 
         //GET: /login
-        [Route("/login")]
-        public IActionResult Login()
+        [ActionName("login")]
+        public IActionResult Login(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         //POST: /login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("/login")]
-        public async Task<IActionResult> Login([Bind("Email,Password")] LoginModel loginData)
+        [ActionName("login")]
+        public async Task<IActionResult> Login([Bind("Email,Password")] LoginModel loginData, string returnUrl)
         {
             if (string.IsNullOrEmpty(loginData.Password) || string.IsNullOrEmpty(loginData.Email)) return Unauthorized();
             UserModel? user = await _context.Users.FirstOrDefaultAsync(p => p.Email == loginData.Email && p.Password == loginData.Password);
@@ -66,25 +67,23 @@ namespace SkachkiWebApp.Controllers
             };
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsPrincipal), authProperties);
+
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
             return RedirectToAction("Index");
         }
 
         //GET: /logout
-        [Route("/logout")]
+        [ActionName("logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
         }
 
-        //GET: /register
-        [Route("/register")]
-        public IActionResult Register()
-        {
-            ViewBag.Roles = new SelectList(_context.Roles, "Id", "Name");
-            return View();
-        }
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

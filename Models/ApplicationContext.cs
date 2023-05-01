@@ -39,6 +39,7 @@ public class ApplicationContext : DbContext
         modelBuilder.Entity<CompetitionTicketModel>().HasKey(o => o.TiketId );
 
 
+        // Delete on prod
         UserModel user = new UserModel { Id = 1, Email = "admin", Password = "admin", CreationDate = DateTime.Now, RoleId = 1 };
         modelBuilder.Entity<UserModel>().HasData(user);
 

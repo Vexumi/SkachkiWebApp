@@ -6,6 +6,6 @@ public class JokeyModel
     public string? Name { get; set; }
     [DisplayName("Date Of Birth")]
     public DateTime? DOB { get; set; } // date of birth 
-    public int? Rating { get; set; }
+    public int Rating { get; set; }
 
 }

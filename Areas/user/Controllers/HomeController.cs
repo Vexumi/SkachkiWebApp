@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SkachkiWebApp.Models;
 using System.Security.Claims;
 using SkachkiWebApp.Areas.user.Models;
 

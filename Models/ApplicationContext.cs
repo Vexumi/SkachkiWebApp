@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
-using SkachkiWebApp.Models;
+using SkachkiWebApp.Areas.user.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 public class ApplicationContext : DbContext

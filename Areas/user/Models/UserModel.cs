@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SkachkiWebApp.Models
+namespace SkachkiWebApp.Areas.user.Models
 {
     public class UserModel
     {

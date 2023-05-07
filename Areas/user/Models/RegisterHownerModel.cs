@@ -1,4 +1,4 @@
-﻿namespace SkachkiWebApp.Models
+﻿namespace SkachkiWebApp.Areas.user.Models
 {
     public class RegisterHownerModel
     {

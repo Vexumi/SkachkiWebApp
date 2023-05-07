@@ -1,0 +1,43 @@
+﻿@model SkachkiWebApp.Areas.user.Models.RegisterJokeyModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+<main class="form-signin w-100 m-auto">
+    <h1 class="h3 mb-3 fw-normal">Регистрация жокея</h1>
+    <hr />
+    <form asp-action="Jokey">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-floating">
+              <input asp-for="Name" type="name" class="form-control" id="floatingInput" placeholder="Иванов Иван Иванович" />
+              <label for="floatingInput">Ф.И.О.</label>
+              <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+          <input asp-for="Email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+          <label for="floatingInput">Адрес эл. почты</label>
+          <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+            <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="Пароль" />
+            <label for="floatingPassword">Пароль</label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating">
+            <input asp-for="DOB" type="date" class="form-control" id="floatingDOB" placeholder="Пароль" />
+            <label for="floatingDOB">Ваша дата рождения</label>
+            <span asp-validation-for="DOB" class="text-danger"></span>
+        </div>
+
+        <hr />
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Зарегистрируйте меня!</button>
+        <a asp-area="" asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary btn-sm">На главную</a>
+    </form>
+</main>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

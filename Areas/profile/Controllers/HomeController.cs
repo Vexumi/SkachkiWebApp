@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SkachkiWebApp.Models;
+using SkachkiWebApp.Areas.user.Models;
 using SQLitePCL;
 using System.Security.Claims;
 

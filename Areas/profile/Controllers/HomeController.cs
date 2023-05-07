@@ -27,6 +27,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
             if (HttpContext.User.IsInRole("admin"))
             {
                 UserModel user = await _context.Users.FirstOrDefaultAsync(p => p.Email == email);
+                ViewBag.role = "admin";
                 if (user != null)
                 {
                     return View("ProfileAdmin", user);
@@ -38,6 +39,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
             {
                 UserModel user = await _context.Users.FirstOrDefaultAsync(p => p.Email == email);
                 JokeyModel jokey = await _context.Jokeys.FirstOrDefaultAsync(p => p.Id == user.UserId);
+                ViewBag.role = "jokey";
                 if (jokey != null)
                 {
                     return View("ProfileJokey", jokey);
@@ -48,6 +50,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
             {
                 UserModel user = await _context.Users.FirstOrDefaultAsync(p => p.Email == email);
                 HorseOwnerModel howner = await _context.HorseOwners.FirstOrDefaultAsync(p => p.Id == user.UserId);
+                ViewBag.role = "howner";
                 if (howner != null)
                 {
                     return View("ProfileHowner", howner);

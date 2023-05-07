@@ -20,7 +20,7 @@ namespace SkachkiWebApp.Areas.user.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Redirect("/");
         }
 
         //GET: /login
@@ -46,12 +46,24 @@ namespace SkachkiWebApp.Areas.user.Controllers
 
             var claimsPrincipal = new ClaimsPrincipal(identity);
 
-            var authProperties = new AuthenticationProperties
+            AuthenticationProperties authProperties;
+            if (loginData.rememberMe) { 
+                authProperties = new AuthenticationProperties
+                {
+                    AllowRefresh = true,
+                    ExpiresUtc = DateTimeOffset.Now.AddMonths(2),
+                    IsPersistent = true,
+                };
+            }
+            else
             {
-                AllowRefresh = true,
-                ExpiresUtc = DateTimeOffset.Now.AddMinutes(10),
-                IsPersistent = true,
-            };
+                authProperties = new AuthenticationProperties
+                {
+                    AllowRefresh = true,
+                    ExpiresUtc = DateTime.Now.AddHours(12),
+                    IsPersistent = true,
+                };
+            }
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsPrincipal), authProperties);
             /*

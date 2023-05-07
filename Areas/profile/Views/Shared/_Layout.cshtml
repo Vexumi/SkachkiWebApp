@@ -23,13 +23,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="profile" asp-controller="Home" asp-action="Index">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            <a class="nav-link text-dark" asp-area="user" asp-controller="Home" asp-action="Logout">Logout</a>
                         </li>
                         @if (ViewBag.role == "admin"){
                             <a class="nav-link text-dark" asp-area="admin" asp-controller="Home" asp-action="Index">Admin Panel</a>
+                        }
+                        @if (ViewBag.role == "howner")
+                        {
+                            <a class="nav-link text-dark" asp-area="profile" asp-controller="Home" asp-action="AddHorse">Add Horse</a>
                         }
                     </ul>
                 </div>

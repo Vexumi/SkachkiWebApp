@@ -59,5 +59,30 @@ namespace SkachkiWebApp.Areas.profile.Controllers
 
             return Unauthorized();
         }
+
+        // GET: /newhorse
+        [Route("/profile/newhorse")]
+        public async Task<IActionResult> AddHorse()
+        {
+            var identities = HttpContext.User.Claims;
+            var emailClaim = identities.FirstOrDefault(p => p.Type == ClaimTypes.Email);
+            string email = emailClaim.Value;
+
+            UserModel user = await _context.Users.FirstOrDefaultAsync(p => p.Email == email);
+            ViewBag.HownerId = user.UserId;
+            return View();
+        }
+
+        // POST: /newhorse
+        [Route("/profile/newhorse")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles="howner")]
+        public async Task<IActionResult> AddHorse(HorseModel horseData)
+        {
+            _context.Horses.Add(horseData);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

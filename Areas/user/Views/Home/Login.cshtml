@@ -20,7 +20,7 @@
 
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me"> Запомнить меня
+        <input asp-for="rememberMe" type="checkbox" value="remember-me"> Запомнить меня
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
@@ -30,5 +30,5 @@
     <div class="form-floating">
        <a asp-area="" asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary btn-sm">На главную</a>
     </div>
-  </form>
+  </form> 
 </main>

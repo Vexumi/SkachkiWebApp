@@ -3,49 +3,42 @@
 @{
     ViewData["Title"] = "Register";
 }
-<div class="center">
-    <h4>Register as horse owner</h4>
+<main class="form-signin w-100 m-auto">
+    <h1 class="h3 mb-3 fw-normal">Регистрация владельца лошади</h1>
     <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Howner">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input type="password" asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Phone" class="control-label"></label>
-                    <input asp-for="Phone" class="form-control" />
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Register me!" class="btn btn-primary" />
-                </div>
-            </form>
+    <form asp-action="Howner">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-floating">
+        <input asp-for="Name" type="name" class="form-control" id="floatingInput" placeholder="Иванов Иван Иванович" />
+        <label for="floatingInput">Ф.И.О.</label>
+        <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-    </div>
-    <hr />
-    <div>
-        <a asp-action="Index">Back to menu</a>
-    </div>
-</div>
+        <div class="form-floating">
+          <input asp-for="Email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+          <label for="floatingInput">Адрес эл. почты</label>
+          <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+            <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="Пароль" />
+            <label for="floatingPassword">Пароль</label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating">
+            <input asp-for="Address" type="address" class="form-control" id="floatingInput" placeholder="Новосибирск, Ул.Ватутина 10" />
+            <label for="floatingInput">Ваш адрес</label>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+            <input asp-for="Phone" type="text" class="form-control" id="floatingInput" placeholder="8 800 555 35 35"/>
+            <label for="floatingInput">Ваш номер телефона</label>
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <hr />
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Зарегистрируйте меня!</button>
+        <a asp-area="" asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary btn-sm">На главную</a>
+    </form>
+</main>
 
 @section Scripts {
     @{

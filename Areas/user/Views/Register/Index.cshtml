@@ -1,8 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Register as?";
 }
-
-<div class="text-center">
-    <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Jokey">Register as jokey</a>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Howner">Register as horseowner</a>
-</div>
+<main class="noname w-auto m-auto">
+    <h1 class="h3 mb-3 fw-normal">Вы хотите зарегистрироваться как...</h1>
+    <hr />
+    <div class="form-floating">
+        <a asp-area="user" asp-controller="Register" asp-action="Howner" type="button" class="btn btn-primary">Владелец лошади</a>
+    </div>
+    <div class="form-floating">
+        <a asp-area="user" asp-controller="Register" asp-action="Jokey" type="button" class="btn btn-primary">Жокей</a>
+    </div>
+    <div class="form-floating btn-home">
+        <a asp-area="" asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary btn-sm">Я ошибся, помогите мне вернуться назад!</a>
+    </div>
+</main>

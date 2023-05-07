@@ -6,7 +6,7 @@
 <main class="form-signin w-100 m-auto">
   <form asp-action="Login">
       <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <img class="mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <img class="mb-4" src="/Imgs/horse.png" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Пожалуйста, войдите</h1>
 
     <div class="form-floating">
@@ -24,5 +24,11 @@
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+    <div class="form-floating">
+       <a asp-area="user" asp-controller="Register" asp-action="Index" type="button" class="btn btn-primary btn-sm">Нет аккаунта?</a>
+    </div>
+    <div class="form-floating">
+       <a asp-area="" asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary btn-sm">На главную</a>
+    </div>
   </form>
 </main>

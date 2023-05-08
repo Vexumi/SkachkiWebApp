@@ -36,9 +36,9 @@ namespace SkachkiWebApp.Areas.user.Controllers
         [Route("/user/login")] // TODO
         public async Task<IActionResult> Login(LoginModel loginData)
         {
-            if (string.IsNullOrEmpty(loginData.Password) || string.IsNullOrEmpty(loginData.Email)) return Unauthorized();
+            if (string.IsNullOrEmpty(loginData.Password) || string.IsNullOrEmpty(loginData.Email)) return RedirectToAction("UserNotFound");
             UserModel? user = await _context.Users.FirstOrDefaultAsync(p => p.Email == loginData.Email && p.Password == loginData.Password);
-            if (user is null) return Unauthorized();
+            if (user is null) return RedirectToAction("UserNotFound");
             var role = await _context.Roles.FirstOrDefaultAsync(p => p.Id == user.RoleId);
             ClaimsIdentity? identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Email, ClaimTypes.Role);
             identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
@@ -85,6 +85,18 @@ namespace SkachkiWebApp.Areas.user.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/Home");
+        }
+
+        [Route("/user/notfound")]
+        public IActionResult UserNotFound()
+        {
+            return View();
+        }
+
+        [Route("/user/accessdenied")]
+        public IActionResult UserAccessDenied()
+        {
+            return View();
         }
     }
 }

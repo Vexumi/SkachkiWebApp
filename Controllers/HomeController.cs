@@ -26,9 +26,10 @@ namespace SkachkiWebApp.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var applicationContext = _context.Competitions.Include(c => c.Ippodrom);
+            return View(await applicationContext.ToListAsync());
         }
 
         public IActionResult Privacy()

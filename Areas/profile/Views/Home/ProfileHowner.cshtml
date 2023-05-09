@@ -1,9 +1,9 @@
-﻿@model HorseOwnerModel
+﻿@model SkachkiWebApp.Areas.profile.Models.HownerViewModel
 @{
     ViewData["Title"] = "Horse owner`s profile";
 }
 
-<h1>Профиль</h1>
+<h2>Профиль</h2>
 
 <div>
     <hr />
@@ -30,3 +30,48 @@
         </dd>
     </dl>
 </div>
+
+<hr />
+<h2>Лошади</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Индивидуальный номер
+            </th>
+            <th>
+                Кличка
+            </th>
+            <th>
+                Пол
+            </th>
+            <th>
+                Дата рождения
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Horses)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nickname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    <a asp-area="profile" asp-controller="Home" asp-action="EditHorse" asp-route-id="@item.Id">Редактировать</a> |
+                    <a asp-area="profile" asp-controller="Home" asp-action="DeleteHorse" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

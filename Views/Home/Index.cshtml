@@ -27,7 +27,14 @@
             <p class="card-text" style="margin-bottom: 10px; margin-left:10px;"><small class="text-muted">Место проведения: @Html.DisplayFor(modelItem => item.Ippodrom.Address)</small></p>
       </div>
       <div class="row">
-            <p class="card-text" style="margin-bottom: 10px; margin-left:10px;"><small class="text-muted">Набор ведется: @Html.DisplayFor(modelItem => item.Recruiting)</small></p>
+            @if (item.Recruiting)
+            {
+                <p class="card-text" style="margin-bottom: 10px; margin-left:10px;"><small class="text-muted">Набор ведется: Да</small></p>
+            }
+            else
+            {
+                <p class="card-text" style="margin-bottom: 10px; margin-left:10px;"><small class="text-muted">Набор ведется: Нет</small></p>
+            }
       </div>
       <div class="row">
             <p class="card-text" style="margin-bottom: 10px; margin-left:10px;"><small class="text-muted">Дата публикации: @Html.DisplayFor(modelItem => item.PublicationDate)</small></p>

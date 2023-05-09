@@ -9,7 +9,7 @@ public class CompetitionModel
     [ForeignKey("IppodromId")]
     public IppodromModel? Ippodrom { get; set; }
     public DateTime PublicationDate { get; set; }
-    public string Description { get; set; }
+    public string? Description { get; set; }
     public bool Recruiting { get; set; }
 
 }

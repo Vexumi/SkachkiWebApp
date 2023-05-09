@@ -34,7 +34,7 @@ namespace SkachkiWebApp.Areas.user.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("/user/login")] // TODO
-        public async Task<IActionResult> Login(LoginModel loginData)
+        public async Task<IActionResult> Login(LoginModel loginData, string returnUrl)
         {
             if (string.IsNullOrEmpty(loginData.Password) || string.IsNullOrEmpty(loginData.Email)) return RedirectToAction("UserNotFound");
             UserModel? user = await _context.Users.FirstOrDefaultAsync(p => p.Email == loginData.Email && p.Password == loginData.Password);
@@ -76,6 +76,7 @@ namespace SkachkiWebApp.Areas.user.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }*/
+            if (!string.IsNullOrEmpty(returnUrl)) return LocalRedirect(returnUrl);
             return Redirect("/Home");
         }
 

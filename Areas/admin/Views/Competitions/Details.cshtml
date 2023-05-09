@@ -26,8 +26,27 @@
             @Html.DisplayNameFor(model => model.Ippodrom)
         </dt>
         <dd class = "col-sm-10">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Ippodroms" asp-action="Details" asp-route-id="@Model.IppodromId">@Model.Ippodrom.Address</a>
+            <a class="nav-link text-dark" asp-area="admin" asp-controller="Ippodroms" asp-action="Details" asp-route-id="@Model.IppodromId">@Model.Ippodrom.Address</a>
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PublicationDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PublicationDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Recruiting)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Recruiting)
+        </dd>
+        
     </dl>
 </div>
 <div>

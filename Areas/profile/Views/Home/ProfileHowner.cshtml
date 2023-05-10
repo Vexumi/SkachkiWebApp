@@ -1,35 +1,77 @@
-﻿@model HorseOwnerModel
+﻿@model SkachkiWebApp.Areas.profile.Models.HownerViewModel
 @{
     ViewData["Title"] = "Horse owner`s profile";
 }
 
-<h1>Profile</h1>
+<h2>Профиль</h2>
 
 <div>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            ФИО:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
+            Адрес:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Address)
         </dd>
 
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
+            Номер телефона:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Phone)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-area="" asp-controller="Home" asp-action="Index">Back to menu</a>
-</div>
+
+<hr />
+<h2>Лошади</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Индивидуальный номер
+            </th>
+            <th>
+                Кличка
+            </th>
+            <th>
+                Пол
+            </th>
+            <th>
+                Дата рождения
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Horses)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nickname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DOB)
+                </td>
+                <td>
+                    <a asp-area="profile" asp-controller="Home" asp-action="EditHorse" asp-route-id="@item.Id">Редактировать</a> |
+                    <a asp-area="profile" asp-controller="Home" asp-action="DeleteHorse" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

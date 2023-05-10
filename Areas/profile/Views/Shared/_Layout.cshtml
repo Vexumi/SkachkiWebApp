@@ -20,13 +20,17 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Домашняя страница</a>
                         </li>
+                        @if (ViewBag.role == "admin"){
+                            <a class="nav-link text-dark" asp-area="admin" asp-controller="Home" asp-action="Index">Панель администратора</a>
+                        }
+                        @if (ViewBag.role == "howner")
+                        {
+                            <a class="nav-link text-dark" asp-area="profile" asp-controller="Home" asp-action="AddHorse">Добавить лошадь</a>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="profile" asp-controller="Home" asp-action="Index">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            <a class="nav-link text-dark" asp-area="user" asp-controller="Home" asp-action="Logout">Выйти</a>
                         </li>
                     </ul>
                 </div>

@@ -58,7 +58,7 @@ namespace SkachkiWebApp.Areas.admin.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(ippodrom);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(ippodrom);

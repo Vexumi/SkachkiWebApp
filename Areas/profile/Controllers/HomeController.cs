@@ -70,7 +70,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
 
         // GET: /newhorse
         [Route("/profile/newhorse")]
-        public IActionResult AddHorse()
+        public async Task<IActionResult> AddHorse()
         {
             ViewBag.Sex = new SelectList(new string[] { "Male", "Female" });
             return View();
@@ -91,7 +91,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
             horseData.HorseOwnerId = user.UserId;
             _context.Horses.Add(horseData);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: profile/EditHorse/5
@@ -107,14 +107,12 @@ namespace SkachkiWebApp.Areas.profile.Controllers
             {
                 return NotFound();
             }
-            ViewBag.HorseOwners = new SelectList(_context.HorseOwners, "Id", "Name", horseModel.HorseOwnerId);
-            ViewBag.Sex = new SelectList(new string[] { "Male", "Female" });
+            ViewBag.HorseOwner = horseModel.HorseOwnerId;
+            ViewBag.Sex = new SelectList(new string[] { "Жеребец", "Кобыла" });
             return View(horseModel);
         }
 
         // POST: profile/EditHorse/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "howner")]
@@ -124,7 +122,6 @@ namespace SkachkiWebApp.Areas.profile.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
@@ -145,8 +142,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HorseOwnerId"] = new SelectList(_context.HorseOwners, "Id", "Id", horseModel.HorseOwnerId);
-            return View(horseModel);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: profile/DeleteHorse/5
@@ -171,6 +167,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
         // POST: profile/DeleteHorse/5
         [HttpPost, ActionName("DeleteHorse")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "howner")]
         public async Task<IActionResult> DeleteHorseConfirmed(int id)
         {
             if (_context.Horses == null)

@@ -23,6 +23,7 @@ public class ApplicationContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         //optionsBuilder.UseSqlite("Data Source=DataBases/Skachki.db");
+        optionsBuilder.EnableSensitiveDataLogging();
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

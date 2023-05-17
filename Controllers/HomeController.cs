@@ -9,6 +9,7 @@ using SkachkiWebApp.Models;
 using SQLitePCL;
 using System;
 using System.Diagnostics;
+using System.Net;
 using System.Security.Claims;
 using System.Security.Permissions;
 using System.Security.Principal;
@@ -28,8 +29,9 @@ namespace SkachkiWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var applicationContext = _context.Competitions.Include(c => c.Ippodrom);
-            return View(await applicationContext.ToListAsync());
+            var competitons = await _context.Competitions.Include(c => c.Ippodrom).ToListAsync();
+            competitons.Reverse();
+            return View(competitons);
         }
 
         public IActionResult Privacy()

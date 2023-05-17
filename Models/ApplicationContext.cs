@@ -37,7 +37,8 @@ public class ApplicationContext : DbContext
         RoleModel horseOwnerRole = new RoleModel { Id = 3, Name = horseOwnerRoleName };
 
         modelBuilder.Entity<RoleModel>().HasData(new RoleModel[] { adminRole, jokeyRole, horseOwnerRole });
-        modelBuilder.Entity<CompetitionTicketModel>().HasKey(o => o.TiketId );
+        modelBuilder.Entity<CompetitionTicketModel>(entity => { entity.HasKey(o => o.TiketId); });
+        modelBuilder.Entity<UserModel>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
 
 
         // Delete on prod

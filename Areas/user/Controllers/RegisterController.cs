@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SkachkiWebApp.Areas.user.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace SkachkiWebApp.Areas.user.Controllers
 {
@@ -36,6 +37,7 @@ namespace SkachkiWebApp.Areas.user.Controllers
         public async Task<IActionResult> Howner([Bind("Name,Email,Password,Address,Phone")] RegisterHownerModel regHD)
         {
             if (!ModelState.IsValid) return RedirectToAction("Index");
+            if (_context.Users.Where(p => p.Email == regHD.Email).Any()) return View("UserAlreadyRegistered");
             HorseOwnerModel userHowner = new HorseOwnerModel { Name = regHD.Name, Address = regHD.Address, Phone = regHD.Phone };
             _context.HorseOwners.Add(userHowner);
             await _context.SaveChangesAsync();
@@ -62,6 +64,7 @@ namespace SkachkiWebApp.Areas.user.Controllers
         public async Task<IActionResult> Jokey([Bind("Name,Email,Password,DOB")] RegisterJokeyModel regJ)
         {
             if (!ModelState.IsValid) return RedirectToAction("Index");
+            if (_context.Users.Where(p => p.Email == regJ.Email).Any()) return View("UserAlreadyRegistered");
             JokeyModel userJokey = new JokeyModel { Name = regJ.Name, DOB = regJ.DOB, Rating = 0 };
             _context.Jokeys.Add(userJokey);
             await _context.SaveChangesAsync();

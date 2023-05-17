@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "User already registered";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center">
+                <h2>Ошибочка!</h2>
+                <h4>Пользователь с данной электронной почтой уже зарегистрирован.</h4>
+                <h4>Пожалуйста, выберете другую электронную почту.</h4>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg">На главную</a>
+                <a asp-area="user" asp-controller="Register" asp-action="Index" class="btn btn-primary btn-lg">Попробовать снова</a>
+            </div>
+        </div>
+    </div>
+</div>

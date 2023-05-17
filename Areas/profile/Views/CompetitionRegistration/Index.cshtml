@@ -1,0 +1,38 @@
+﻿@model CompetitionTicketModel
+
+@{
+    ViewData["Title"] = "Register on competition";
+}
+
+<h4>Регистрация</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CompetitionId" class ="form-control" />
+            <input type="hidden" asp-for="Result" class="form-control" />
+            <div class="form-group">
+                <label asp-for="HorseId" class="control-label"></label>
+                <select asp-for="HorseId" class ="form-control" asp-items="ViewBag.Horses"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="JokeyId" class="control-label"></label>
+                <select asp-for="JokeyId" class ="form-control" asp-items="ViewBag.Jokeys"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Зарегистрироваться" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-area="" asp-controller="Home" asp-action="Index">На главную</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

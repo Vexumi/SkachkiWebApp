@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
+@if (!Model.Any()) {
+    <div class="text-center h4"> Oops.. Соревнований пока нет</div>
+}
 @foreach (var item in Model) {
     <div class="card border-dark">
       <div class="row">
@@ -15,7 +19,7 @@
         </div>
         <div class="col-md-3">
           <img src="/Imgs/horse.png" class="img-fluid rounded-start" style="max-width:270px;" alt="...">
-          <a class="btn btn-primary" style="width: 250px">Стать участником</a>
+              <a asp-area="profile" asp-controller="CompetitionRegistration" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary" style="width: 250px">Стать участником</a>
         </div>
       </div>
       <div class="align-content-center">

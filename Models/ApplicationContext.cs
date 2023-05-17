@@ -23,6 +23,7 @@ public class ApplicationContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         //optionsBuilder.UseSqlite("Data Source=DataBases/Skachki.db");
+        optionsBuilder.EnableSensitiveDataLogging();
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,7 +47,7 @@ public class ApplicationContext : DbContext
         IppodromModel ippodrom = new IppodromModel { Id = 1, Address = "Ул.Молодости 10", Description = "Ипподром в центре гэса!" };
         modelBuilder.Entity<IppodromModel>().HasData(ippodrom);
 
-        CompetitionModel competition = new CompetitionModel { Id = 1, Name="Все российские гонки на лошадях", Date=DateTime.Now.AddDays(10), IppodromId=1,  PublicationDate=DateTime.Now, Recruiting=true, 
+        CompetitionModel competition = new CompetitionModel { Id = 1, Name="Всероссийские гонки на лошадях", Date=DateTime.Now.AddDays(10), IppodromId=1,  PublicationDate=DateTime.Now, Recruiting=true, 
             Description= "Кубок Победы – серия турниров по конному спорту, " +
             "которая на протяжении 5 лет проводится группой компаний MAXIMA. " +
             "Цель турнира - объединить спортсменов-конников из регионов России, а также дружественных стран, " +

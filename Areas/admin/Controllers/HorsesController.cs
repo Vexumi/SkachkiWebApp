@@ -51,7 +51,7 @@ namespace SkachkiWebApp.Areas.admin.Controllers
         public IActionResult Create()
         {
             ViewBag.HorseOwners = new SelectList(_context.HorseOwners, "Id", "Name");
-            ViewBag.Sex = new SelectList(new string[] { "Male", "Female" });
+            ViewBag.Sex = new SelectList(new string[] { "Жеребец", "Кобыла" });
             return View();
         }
 
@@ -86,7 +86,7 @@ namespace SkachkiWebApp.Areas.admin.Controllers
                 return NotFound();
             }
             ViewBag.HorseOwners = new SelectList(_context.HorseOwners, "Id", "Name", horseModel.HorseOwnerId);
-            ViewBag.Sex = new SelectList(new string[] { "Male", "Female" });
+            ViewBag.Sex = new SelectList(new string[] { "Жеребец", "Кобыла" });
             return View(horseModel);
         }
 

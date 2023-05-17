@@ -72,7 +72,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
         [Route("/profile/newhorse")]
         public async Task<IActionResult> AddHorse()
         {
-            ViewBag.Sex = new SelectList(new string[] { "Male", "Female" });
+            ViewBag.Sex = new SelectList(new string[] { "Жеребец", "Кобыла" });
             return View();
         }
 

@@ -45,5 +45,18 @@ namespace SkachkiWebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet("getImage/{id}")]
+        public async Task<IActionResult> GetImage(int id)
+        {
+            var competition = _context.Competitions.FirstOrDefault(g => g.Id == id); // Получаем изображение по его ID
+
+            if (competition == null) // Проверяем наличие изображения в базе данных
+            {
+                return NotFound(); // Возвращаем ошибку
+            }
+
+            return File(competition.ImageData, "image/jpeg"); // Возвращаем изображение в браузер в формате файла с типом MIME "image/jpeg"
+        }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 using SkachkiWebApp.Models;
 using SQLitePCL;
 using System;
@@ -10,6 +11,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using System.Security.Permissions;
 using System.Security.Principal;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SkachkiWebApp.Areas.admin.Controllers
 {

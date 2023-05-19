@@ -40,6 +40,19 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
+            Фото
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.ImageData != null && Model.ImageData.Length > 0)
+            {
+                    <img src="@Url.Action("GetImage", "Home", new { id = Model.Id })", class="img-thumbnail" />
+            }
+            else
+            {
+                <p>Нет фото</p>
+            }
+        </dd>
+        <dt class = "col-sm-2">
             Набор ведется
         </dt>
         <dd class = "col-sm-10">

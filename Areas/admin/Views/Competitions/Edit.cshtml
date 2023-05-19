@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -36,7 +36,21 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-             <div class="form-group">
+            <div class="form-group">
+                <div><label for="file" class="control-label">Фото</label></div>
+                
+                @if (Model.ImageData != null && Model.ImageData.Length > 0)
+                {
+                    <img src="@Url.Action("GetImage", "Home", new { id = Model.Id })", class="img-thumbnail"/>
+                }
+                else
+                {
+                    <p>No image found</p>
+                    <input type="file" class="form-control-file" id="file" name="file"> <!--TODO THIS SHIT-->
+                }
+               
+            </div>
+            <div class="form-group">
                 <label asp-for="Recruiting" class="control-label">Набор ведется</label>
                 <input asp-for="Recruiting" class="form-check-input" type="checkbox">
                 <span asp-validation-for="Recruiting" class="text-danger"></span>

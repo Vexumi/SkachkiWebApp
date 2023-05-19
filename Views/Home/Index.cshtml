@@ -18,7 +18,14 @@
           </div>
         </div>
         <div class="col-md-3">
-          <img src="/Imgs/horse.png" class="img-fluid rounded-start" style="max-width:270px;" alt="...">
+                @if (item.ImageData != null && item.ImageData.Length > 0)
+                {
+                    <img src="@Url.Action("GetImage", new { id = item.Id })" class="img-fluid rounded-start" style="max-width:270px;" alt="Horse">
+                }
+                else
+                {
+                     <img src="/Imgs/horse.png" class="img-fluid rounded-start" style="max-width:270px;" alt="Horse">
+                }
               <a asp-area="profile" asp-controller="CompetitionRegistration" asp-action="Index" asp-route-id="@item.Id" class="btn btn-primary" style="width: 250px">Стать участником</a>
         </div>
       </div>

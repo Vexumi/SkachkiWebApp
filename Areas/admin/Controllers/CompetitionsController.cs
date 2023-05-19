@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
+using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace SkachkiWebApp.Areas.admin.Controllers
 {
@@ -59,11 +62,24 @@ namespace SkachkiWebApp.Areas.admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Date,IppodromId,PublicationDate,Description,Recruiting")] CompetitionModel competition)
+        public async Task<IActionResult> Create([Bind("Id,Name,Date,IppodromId,PublicationDate,Description,ImageData,Recruiting")] CompetitionModel competition, IFormFile file = null)
         {
             competition.PublicationDate = DateTime.Now;
             if (ModelState.IsValid)
             {
+                byte[] imageData = null;
+
+                //проверяем, что файл существует и имеет размер больше нуля
+                if (file != null && file.Length > 0)
+                {
+                    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)file.Length);
+                    }
+                    competition.ImageName = file.FileName;
+                }
+                competition.ImageData = imageData;
+
                 _context.Add(competition);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,15 +110,27 @@ namespace SkachkiWebApp.Areas.admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,IppodromId,PublicationDate,Description,Recruiting")] CompetitionModel competition)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Date,IppodromId,PublicationDate,Description,ImageData,Recruiting")] CompetitionModel competition, IFormFile? file = null)
         {
             if (id != competition.Id)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
+                byte[] imageData = null;
+
+                //проверяем, что файл существует и имеет размер больше нуля
+                if (file != null && file.Length > 0)
+                {
+                    using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)file.Length);
+                    }
+                    competition.ImageName = file.FileName;
+                    competition.ImageData = imageData;
+                }
+
                 try
                 {
                     _context.Update(competition);
@@ -120,6 +148,13 @@ namespace SkachkiWebApp.Areas.admin.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+            }
+            foreach (ModelStateEntry modelState in ViewData.ModelState.Values)
+            {
+                foreach (ModelError error in modelState.Errors)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
             }
             ViewData["IppodromId"] = new SelectList(_context.Ippodroms, "Id", "Address", competition.IppodromId);
             return View(competition);

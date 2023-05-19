@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -57,14 +58,15 @@ namespace SkachkiWebApp.Areas.profile.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index([Bind("TicketId, CompetitionId, HorseId, JokeyId, Result")]CompetitionTicketModel cTicketData)
+        public async Task<IActionResult> Index([Bind("TicketId,CompetitionId,HorseId,JokeyId,Result")] CompetitionTicketModel cTicketData)
         {
+            Console.WriteLine($"{cTicketData.CompetitionId} {cTicketData.HorseId} {cTicketData.JokeyId}");
             if (ModelState.IsValid)
             {
                 if (_context.CompetitionTickets.
-                    Where(c => 
+                    Where(c =>
                     (c.CompetitionId == cTicketData.CompetitionId && c.HorseId == cTicketData.HorseId)
-                    || 
+                    ||
                     (c.CompetitionId == cTicketData.CompetitionId && c.JokeyId == cTicketData.JokeyId)
                     ).Any())
                 {
@@ -74,7 +76,12 @@ namespace SkachkiWebApp.Areas.profile.Controllers
                 await _context.SaveChangesAsync();
                 return Redirect("/");
             }
-            ViewBag.Horses = new SelectList(await _context.Horses.Where(p => p.HorseOwnerId == cTicketData.Horse.HorseOwnerId).ToListAsync(), "Id", "Nickname", cTicketData.HorseId);
+            IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+            Console.WriteLine(allErrors);
+
+            var horse = await _context.Horses.FirstOrDefaultAsync(h => h.Id == cTicketData.HorseId);
+            var hownerId = horse.HorseOwnerId;
+            ViewBag.Horses = new SelectList(await _context.Horses.Where(p => p.HorseOwnerId == hownerId).ToListAsync(), "Id", "Nickname", cTicketData.HorseId);
             ViewBag.Jokeys = new SelectList(await _context.Jokeys.ToListAsync(), "Id", "Name", cTicketData.JokeyId);
             return View(cTicketData);
         }

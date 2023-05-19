@@ -8,5 +8,6 @@
         public string? Phone { get; set; }
         public string? Address { get; set; }
         public IEnumerable<HorseModel>? Horses { get; set; }
+        public IEnumerable<CompetitionTicketModel>? Competitions { get; set; }
     }
 }

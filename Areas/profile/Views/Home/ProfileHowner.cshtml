@@ -75,3 +75,49 @@
         }
     </tbody>
 </table>
+
+<h2>Результаты соревнований</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Название
+            </th>
+            <th>
+                Дата
+            </th>
+            <th>
+                Кличка лошади
+            </th>
+            <th>
+                Жокей
+            </th>
+            <th>
+                Место
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item2 in Model.Competitions)
+        {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item2.Competition.Name)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item2.Competition.Date)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item2.Horse.Nickname)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item2.Jokey.Name)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item2.Result)
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

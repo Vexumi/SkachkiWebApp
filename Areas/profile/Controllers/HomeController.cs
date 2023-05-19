@@ -47,7 +47,10 @@ namespace SkachkiWebApp.Areas.profile.Controllers
                 ViewBag.role = userRole;
                 if (jokey != null)
                 {
-                    return View("ProfileJokey", jokey);
+                    var cTickets = _context.CompetitionTickets.Include(c => c.Competition).Include(c => c.Jokey).Include(c => c.Horse);
+                    var competitions = cTickets.Where(p => p.JokeyId == jokey.Id).AsEnumerable();
+                    var viewModel = new JokeyViewModel() { Id = jokey.Id, Name = jokey.Name, DOB = jokey.DOB, Rating = jokey.Rating, Competitions = competitions};
+                    return View("ProfileJokey", viewModel);
                 }
             }
             // if user signed in as horse owner
@@ -60,7 +63,9 @@ namespace SkachkiWebApp.Areas.profile.Controllers
                 if (howner != null)
                 {
                     var horses = _context.Horses.Where(p => p.HorseOwnerId == howner.Id).AsEnumerable();
-                    HownerViewModel viewModel = new HownerViewModel() { Id = howner.Id, Email = user.Email, Name = howner.Name, Address = howner.Address, Phone = howner.Phone, Horses = horses };
+                    var cTickets = _context.CompetitionTickets.Include(c => c.Competition).Include(c => c.Jokey).Include(c => c.Horse);
+                    var competitions = cTickets.Where(p => p.Horse.HorseOwner.Id == howner.Id).AsEnumerable();
+                    HownerViewModel viewModel = new HownerViewModel() { Id = howner.Id, Email = user.Email, Name = howner.Name, Address = howner.Address, Phone = howner.Phone, Horses = horses, Competitions = competitions};
                     return View("ProfileHowner", viewModel);
                 }
             }

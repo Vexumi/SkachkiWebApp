@@ -25,7 +25,7 @@
             Ипподром
         </dt>
         <dd class = "col-sm-10">
-            <a class="nav-link text-dark" asp-area="admin" asp-controller="Ippodroms" asp-action="Details" asp-route-id="@Model.IppodromId">@Model.Ippodrom.Address</a>
+            <a asp-area="admin" asp-controller="Ippodroms" asp-action="Details" asp-route-id="@Model.IppodromId">@Html.DisplayFor(model => model.Ippodrom.Address)</a>
         </dd>
         <dt class = "col-sm-2">
             Дата публикации

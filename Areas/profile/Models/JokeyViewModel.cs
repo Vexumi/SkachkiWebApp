@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SkachkiWebApp.Areas.profile.Models
 {
@@ -6,7 +7,7 @@ namespace SkachkiWebApp.Areas.profile.Models
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        [DisplayName("Date of birth")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yy}", ApplyFormatInEditMode = true)]
         public DateTime? DOB { get; set; } // date of birth 
         public int Rating { get; set; }
         public IEnumerable<CompetitionTicketModel>? Competitions { get; set; }

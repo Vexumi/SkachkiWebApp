@@ -4,41 +4,39 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>HorseModel</h4>
+<h1>Добавление лошади</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Nickname" class="control-label"></label>
+                <label asp-for="Nickname" class="control-label">Кличка</label>
                 <input asp-for="Nickname" class="form-control" />
                 <span asp-validation-for="Nickname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Sex" class="control-label"></label>
+                <label asp-for="Sex" class="control-label">Пол</label>
                 <select asp-for="Sex" class="form-control" asp-items="ViewBag.Sex"></select>
             </div>
             <div class="form-group">
-                <label asp-for="DOB" class="control-label"></label>
+                <label asp-for="DOB" class="control-label">Дата рождения</label>
                 <input type="date" asp-for="DOB" class="form-control" />
                 <span asp-validation-for="DOB" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HorseOwnerId" class="control-label"></label>
+                <label asp-for="HorseOwnerId" class="control-label">Владелец лошади</label>
                 <select asp-for="HorseOwnerId" class ="form-control" asp-items="ViewBag.HorseOwners"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Обратно к списку</a>
 </div>
 
 @section Scripts {

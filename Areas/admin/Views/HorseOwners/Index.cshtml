@@ -4,22 +4,18 @@
     ViewData["Title"] = "Horse owners";
 }
 
-<h1>Horse owners</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Владельцы лошадей</h1>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                ФИО
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                Адрес
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                Телефон
             </th>
             <th></th>
         </tr>
@@ -37,9 +33,9 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

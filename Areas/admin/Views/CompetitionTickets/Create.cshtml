@@ -4,40 +4,38 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>CompetitionTicketModel</h4>
+<h1>Добавление записи</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CompetitionId" class="control-label"></label>
+                <label asp-for="CompetitionId" class="control-label">Турнир</label>
                 <select asp-for="CompetitionId" class ="form-control" asp-items="ViewBag.Competitions"></select>
             </div>
             <div class="form-group">
-                <label asp-for="HorseId" class="control-label"></label>
+                <label asp-for="HorseId" class="control-label">Лошадь</label>
                 <select asp-for="HorseId" class ="form-control" asp-items="ViewBag.Horses"></select>
             </div>
             <div class="form-group">
-                <label asp-for="JokeyId" class="control-label"></label>
+                <label asp-for="JokeyId" class="control-label">Жокей</label>
                 <select asp-for="JokeyId" class ="form-control" asp-items="ViewBag.Jokeys"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Result" class="control-label"></label>
+                <label asp-for="Result" class="control-label">Результат</label>
                 <input asp-for="Result" class="form-control" />
                 <span asp-validation-for="Result" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Добавить" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Обратно к списку</a>
 </div>
 
 @section Scripts {

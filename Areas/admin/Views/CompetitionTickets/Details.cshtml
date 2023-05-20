@@ -4,32 +4,31 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
+<h1>Подробнее</h1>
+<hr />
 <div>
-    <h4>CompetitionTicketModel</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Competition)
+            Название турнира
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Competition.Name)
+            
+            <a asp-area="admin" asp-controller="Competitions" asp-action="Details" asp-route-id="@Model.CompetitionId">@Html.DisplayFor(model => model.Competition.Name)</a>
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Horse)
+            Лошадь
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Horse.Id)
+            <a asp-area="admin" asp-controller="Horses" asp-action="Details" asp-route-id="@Model.HorseId">@Html.DisplayFor(model => model.Horse.Nickname)</a>
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Jokey)
+            Жокей
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Jokey.Name)
+            <a asp-area="admin" asp-controller="Jokeys" asp-action="Details" asp-route-id="@Model.JokeyId">@Html.DisplayFor(model => model.Jokey.Name)</a>
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Result)
+            Результат
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Result)
@@ -37,6 +36,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.TiketId">Редактировать</a> |
+    <a asp-action="Index">Обратно к списку</a>
 </div>

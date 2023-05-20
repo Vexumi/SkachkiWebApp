@@ -4,28 +4,28 @@
     ViewData["Title"] = "Competition Tickets";
 }
 
-<h1>Competiton tickets</h1>
+<h1>Участие в соревнованиях</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить новую запись</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TiketId)
+                Уникальный номер
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Competition)
+                Название турнира
             </th>
             <th>
-                Horse Id
+                Лошадь
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Jokey)
+                Жокей
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Result)
+                Результат
             </th>
             <th></th>
         </tr>
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Result)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TiketId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TiketId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TiketId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.TiketId">Редактировать</a> |
+                <a asp-action="Details" asp-route-id="@item.TiketId">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.TiketId">Удалить</a>
             </td>
         </tr>
 }

@@ -53,7 +53,7 @@ namespace SkachkiWebApp.Areas.admin.Controllers
         public IActionResult Create()
         {
             ViewBag.Competitions = new SelectList(_context.Competitions, "Id", "Name");
-            ViewBag.Horses = new SelectList(_context.Horses, "Id", "Id");
+            ViewBag.Horses = new SelectList(_context.Horses, "Id", "Nickname");
             ViewBag.Jokeys = new SelectList(_context.Jokeys, "Id", "Name");
             return View();
         }

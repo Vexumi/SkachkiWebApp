@@ -93,7 +93,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
             string email = emailClaim.Value;
 
             UserModel user = await _context.Users.FirstOrDefaultAsync(p => p.Email == email);
-            horseData.HorseOwnerId = user.UserId;
+            horseData.HorseOwnerId = Convert.ToInt32(user.UserId);
             _context.Horses.Add(horseData);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

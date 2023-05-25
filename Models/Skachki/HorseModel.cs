@@ -9,7 +9,7 @@ public class HorseModel
     public string? Sex { get; set; }
     [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime? DOB { get; set; } // date of birth
-    public int? HorseOwnerId { get; set; }
+    public int HorseOwnerId { get; set; }
     [ForeignKey("HorseOwnerId")]
     public HorseOwnerModel? HorseOwner { get; set; }
 }

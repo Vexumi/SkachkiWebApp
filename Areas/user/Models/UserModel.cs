@@ -13,7 +13,7 @@ namespace SkachkiWebApp.Areas.user.Models
         public int RoleId { get; set; }
         [ForeignKey("RoleId")]
         public RoleModel Role { get; set; }
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
     }
 
 }

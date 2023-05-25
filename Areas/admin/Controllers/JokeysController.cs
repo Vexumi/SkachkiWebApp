@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SkachkiWebApp.Areas.user.Models;
 
 namespace SkachkiWebApp.Areas.admin.Controllers
 {
@@ -44,29 +45,6 @@ namespace SkachkiWebApp.Areas.admin.Controllers
                 return NotFound();
             }
 
-            return View(jokey);
-        }
-
-        // GET: Jokeys/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Jokeys/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,DOB,Rating")] JokeyModel jokey)
-        {
-            if (ModelState.IsValid)
-            {
-                if (jokey.Rating == null) jokey.Rating = 0;
-                _context.Add(jokey);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
             return View(jokey);
         }
 
@@ -151,6 +129,8 @@ namespace SkachkiWebApp.Areas.admin.Controllers
             var jokey = await _context.Jokeys.FindAsync(id);
             if (jokey != null)
             {
+                UserModel user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == jokey.Id && u.RoleId == 2);
+                _context.Users.Remove(user);
                 _context.Jokeys.Remove(jokey);
             }
 

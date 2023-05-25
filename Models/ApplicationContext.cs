@@ -42,7 +42,7 @@ public class ApplicationContext : DbContext
 
 
         // Delete on prod
-        UserModel user = new UserModel { Id = 1, Email = "admin@admin", Password = "admin", CreationDate = DateTime.Now, RoleId = 1 };
+        UserModel user = new UserModel { Id = 1, Email = "admin@admin", Password = "admin", CreationDate = DateTime.Now, RoleId = 1, UserId = -1};
         modelBuilder.Entity<UserModel>().HasData(user);
 
         IppodromModel ippodrom = new IppodromModel { Id = 1, Address = "Ул.Молодости 10", Description = "Ипподром в центре гэса!" };

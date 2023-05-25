@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SkachkiWebApp.Areas.user.Models;
 
 namespace SkachkiWebApp.Areas.admin.Controllers
 {
@@ -47,27 +48,6 @@ namespace SkachkiWebApp.Areas.admin.Controllers
             return View(horseOwnerModel);
         }
 
-        // GET: HorseOwners/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: HorseOwners/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,Phone")] HorseOwnerModel horseOwnerModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(horseOwnerModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(horseOwnerModel);
-        }
 
         // GET: HorseOwners/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -150,6 +130,8 @@ namespace SkachkiWebApp.Areas.admin.Controllers
             var horseOwnerModel = await _context.HorseOwners.FindAsync(id);
             if (horseOwnerModel != null)
             {
+                UserModel user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == horseOwnerModel.Id && u.RoleId == 3);
+                _context.Users.Remove(user);
                 _context.HorseOwners.Remove(horseOwnerModel);
             }
 

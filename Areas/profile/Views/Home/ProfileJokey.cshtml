@@ -4,70 +4,109 @@
     ViewData["Title"] = "Jokey`s profile";
 }
 
-<h1>Профиль</h1>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            ФИО:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt class = "col-sm-2">
-            Дата рождения:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-
-        <dt class = "col-sm-2">
-            Рейтинг:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
-    </dl>
-</div>
-
-<h2>Результаты соревнований</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Название
-            </th>
-            <th>
-                Дата
-            </th>
-            <th>
-                Кличка лошади
-            </th>
-            <th>
-                Место
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item2 in Model.Competitions)
-        {
+<section>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="/Imgs/ava_jokey.png" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">@Html.DisplayFor(model => model.Name)</h5>
+            <p class="text-muted mb-1">Жокей</p>
+            <div class="d-flex justify-content-center mb-2">
+                <a asp-area="user" asp-controller="Home" asp-action="Logout" type="button" class="btn btn-primary">Выйти</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">ФИО</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">@Html.DisplayFor(model => model.Name)</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Электронная почта</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">@Html.DisplayFor(model => model.Email)</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Дата рождения</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">@Html.DisplayFor(model => model.DOB)</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Рейтинг</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">@Html.DisplayFor(model => model.Rating)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="card mb-4">
+    <div class="card-header"> 
+        <h4 class="text-center text-muted mb-0">Результаты соревнований</h4>
+    </div>
+    <div class="card-body">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-            @Html.DisplayFor(modelItem => item2.Competition.Name)
-                </td>
-                <td>
-            @Html.DisplayFor(modelItem => item2.Competition.Date)
-                </td>
-                <td>
-            @Html.DisplayFor(modelItem => item2.Horse.Nickname)
-                </td>
-                <td>
-            @Html.DisplayFor(modelItem => item2.Result)
-                </td>
+                <th class="text-muted mb-0">
+                    Название
+                </th>
+                <th class="text-muted mb-0">
+                    Дата
+                </th>
+                <th class="text-muted mb-0">
+                    Кличка лошади
+                </th>
+                <th class="text-muted mb-0">
+                    Место
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item2 in Model.Competitions)
+            {
+                <tr>
+                     <td class="text-muted mb-0">
+                @Html.DisplayFor(modelItem => item2.Competition.Name)
+                    </td>
+                      <td class="text-muted mb-0">
+                @Html.DisplayFor(modelItem => item2.Competition.Date)
+                    </td>
+                    <td class="text-muted mb-0">
+                @Html.DisplayFor(modelItem => item2.Horse.Nickname)
+                    </td>
+                     <td class="text-muted mb-0">
+                @Html.DisplayFor(modelItem => item2.Result)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+</section>

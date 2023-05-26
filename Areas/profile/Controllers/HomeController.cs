@@ -49,7 +49,7 @@ namespace SkachkiWebApp.Areas.profile.Controllers
                 {
                     var cTickets = _context.CompetitionTickets.Include(c => c.Competition).Include(c => c.Jokey).Include(c => c.Horse);
                     var competitions = cTickets.Where(p => p.JokeyId == jokey.Id).AsEnumerable();
-                    var viewModel = new JokeyViewModel() { Id = jokey.Id, Name = jokey.Name, DOB = jokey.DOB, Rating = jokey.Rating, Competitions = competitions};
+                    var viewModel = new JokeyViewModel() { Id = jokey.Id, Name = jokey.Name, DOB = jokey.DOB, Rating = jokey.Rating, Email=email, Competitions = competitions};
                     return View("ProfileJokey", viewModel);
                 }
             }

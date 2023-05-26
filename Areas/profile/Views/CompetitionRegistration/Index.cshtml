@@ -4,33 +4,30 @@
     ViewData["Title"] = "Register on competition";
 }
 
-<h4>Регистрация</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Index">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="text-center">
+    <main class="form-signin w-200 m-auto" style="display: flex; align-items: center;">
+      <form method="post">
             <input type="hidden" asp-for="CompetitionId" class ="form-control" />
             <input type="hidden" asp-for="Result" class="form-control" />
-            <div class="form-group">
-                <label asp-for="HorseId" class="control-label">Лошадь</label>
-                <select asp-for="HorseId" class ="form-control" asp-items="ViewBag.Horses"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="JokeyId" class="control-label">Жокей</label>
-                <select asp-for="JokeyId" class ="form-control" asp-items="ViewBag.Jokeys"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Зарегистрироваться" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h1 class="h3 mb-3 fw-normal">Регистрация на @Model.Competition?.Name</h1>
 
-<div>
-    <a asp-area="" asp-controller="Home" asp-action="Index">На главную</a>
+        <div class="form-floating">
+          <select asp-for="HorseId" class ="form-control" asp-items="ViewBag.Horses"></select>
+          <label asp-for="HorseId" class="control-label">Лошадь</label>
+        </div>
+        <div class="form-floating">
+            <select asp-for="JokeyId" class ="form-control" asp-items="ViewBag.Jokeys"></select>
+            <label asp-for="JokeyId" class="control-label">Жокей</label>
+        </div>
+        <input type="submit" value="Зарегистрироваться" class="btn btn-primary" />
+        <div class="form-floating">
+           <a asp-area="" asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary btn-sm">На главную</a>
+        </div>
+      </form> 
+    </main>
 </div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

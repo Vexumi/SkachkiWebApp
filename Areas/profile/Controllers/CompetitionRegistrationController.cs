@@ -47,7 +47,8 @@ namespace SkachkiWebApp.Areas.profile.Controllers
                     ViewBag.Horses = new SelectList(await _context.Horses.Where(p => p.HorseOwnerId == howner.Id).ToListAsync(), "Id", "Nickname");
                     ViewBag.Jokeys = new SelectList(await _context.Jokeys.ToListAsync(), "Id", "Name");
                     ViewBag.Howner = howner;
-                    var ticket = new CompetitionTicketModel() { CompetitionId = id };
+                    var competition = await _context.Competitions.FirstOrDefaultAsync(c => c.Id == id);
+                    var ticket = new CompetitionTicketModel() { CompetitionId = id, Competition=competition };
                     return View(ticket);
                 }
             }

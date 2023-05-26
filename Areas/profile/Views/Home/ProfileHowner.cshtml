@@ -155,8 +155,8 @@
                         @Html.DisplayFor(modelItem => item2.DOB)
                     </td>
                     <td>
-                        <a asp-area="profile" asp-controller="Home" asp-action="EditHorse" asp-route-id="@item2.Id">Редактировать</a> |
-                        <a asp-area="profile" asp-controller="Home" asp-action="DeleteHorse" asp-route-id="@item2.Id">Удалить</a>
+                        <a class="btn btn-light btn-outline-secondary" asp-area="profile" asp-controller="Home" asp-action="EditHorse" asp-route-id="@item2.Id">Редактировать</a>
+                        <a class="btn btn-light btn-outline-secondary" asp-area="profile" asp-controller="Home" asp-action="DeleteHorse" asp-route-id="@item2.Id">Удалить</a>
                     </td>
                 </tr>
         }

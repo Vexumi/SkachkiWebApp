@@ -2,4 +2,4 @@
 Веб-приложение для учета и администрирования конных скачек.
 
 ## Настройка
-В файле appsettings.json нужно вставить свою строку подключения к Microsoft SQL Server.
+В файле appsettings.json в DefaultConnection нужно вставить свою строку подключения к Microsoft SQL Server.
